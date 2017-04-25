@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Most Popular</title>
+  </head>
+  <body>
+      {%for secret in secretList%}
+      <p>{{secret.secret_message}} {{secret.list_of_users_liked.count}}:likes {{secret.created_at}}</p>
+        {%if userInstance.id == secret.id%}
+            <p>You posted this</p>
+            <a href="/delete/{{secret.id}}">delete</a>
+        {%endif%}
+
+        {%if userInstance in secret.list_of_users_liked.all %}
+            <p>You liked this</p>
+          {% else %}
+              <a href="/like2/{{secret.id}}">Like</a>
+          {%endif%}
+      {%endfor%}
+
+  </body>
+</html>
